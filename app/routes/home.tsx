@@ -1,6 +1,8 @@
 import type { Route } from "./+types/home";
 import Narvbar from "../components/Narvbar";
 import { resumes } from "../constants";
+import ResumeCard from "../components/ResumeCard";
+
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "Resumind" },
@@ -19,11 +21,13 @@ export default function Home() {
         </div>
       </section>
 
-      {resumes.map((resume) => (
-        <div key={resume.id}>
-          <h1> {resume.jobTitle} </h1>
+      {resumes.length > 0 && (
+        <div className="resumes-section">
+          {resumes.map((resume) => (
+            <ResumeCard key={resume.id} resume={resume} />
+          ))}
         </div>
-      ))}
+      )}
     </main>
   );
 }
