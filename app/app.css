@@ -6,22 +6,22 @@
   --font-sans:
     "Mona Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --color-dark-200: #475467;
-  --color-light-blue-100: #c1d3f81a;
-  --color-light-blue-200: #a7bff14d;
+  --color-dark-200: #4a6b4a;
+  --color-light-matcha-100: #d4e6d41a;
+  --color-light-matcha-200: #a8c7a84d;
 
-  --color-badge-green: #d5faf1;
-  --color-badge-red: #f9e3e2;
-  --color-badge-yellow: #fceed8;
+  --color-badge-green: #e6f2e6;
+  --color-badge-red: #f2e6e6;
+  --color-badge-yellow: #f2f0e6;
 
-  --color-badge-green-text: #254d4a;
-  --color-badge-red-text: #752522;
-  --color-badge-yellow-text: #73321b;
+  --color-badge-green-text: #4a6b4a;
+  --color-badge-red-text: #6b4a4a;
+  --color-badge-yellow-text: #6b664a;
 }
 
 html,
 body {
-  @apply bg-white;
+  @apply bg-gradient-to-br from-[#F5F3F0] via-[#E8E3DE] to-[#E6E0F0];
 }
 
 main {
@@ -39,11 +39,11 @@ label {
   @apply text-dark-200;
 }
 input {
-  @apply w-full p-4 inset-shadow rounded-2xl focus:outline-none bg-white;
+  @apply w-full p-4 inset-shadow rounded-2xl focus:outline-none bg-[#F5F3F0]/80;
 }
 
 textarea {
-  @apply w-full p-4 inset-shadow rounded-2xl focus:outline-none bg-white;
+  @apply w-full p-4 inset-shadow rounded-2xl focus:outline-none bg-[#F5F3F0]/80;
 }
 
 form {
@@ -52,10 +52,10 @@ form {
 
 @layer components {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#AB8C95] via-[#000000] to-[#8E97C5];
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#4A6B4A] via-[#6B8E6B] to-[#9B7FB5];
   }
   .gradient-border {
-    @apply bg-gradient-to-b from-light-blue-100 to-light-blue-200 p-4 rounded-2xl;
+    @apply bg-gradient-to-b from-light-matcha-100 to-light-matcha-200 p-4 rounded-2xl;
   }
   .primary-button {
     @apply primary-gradient text-white rounded-full px-4 py-2 cursor-pointer w-full;
@@ -86,7 +86,7 @@ form {
   }
 
   .resume-card {
-    @apply flex flex-col gap-8 h-[560px] w-[350px] lg:w-[430px] xl:w-[490px] bg-white rounded-2xl p-4;
+    @apply flex flex-col gap-8 h-[560px] w-[350px] lg:w-[430px] xl:w-[490px] bg-[#F5F3F0]/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg;
   }
 
   .resume-card-header {
@@ -98,7 +98,7 @@ form {
   }
 
   .navbar {
-    @apply flex flex-row justify-between items-center bg-white rounded-full p-4 w-full px-10 max-w-[1200px] mx-auto;
+    @apply flex flex-row justify-between items-center bg-[#F5F3F0]/90 rounded-full p-4 w-full px-10 max-w-[1200px] mx-auto;
   }
 
   .score-badge {
@@ -110,36 +110,36 @@ form {
   }
 
   .uplader-drag-area {
-    @apply relative p-8 text-center transition-all duration-700 cursor-pointer bg-white rounded-2xl min-h-[208px];
+    @apply relative p-8 text-center transition-all duration-700 cursor-pointer bg-[#F5F3F0]/80 rounded-2xl min-h-[208px];
   }
   .uploader-selected-file {
-    @apply flex items-center justify-between p-3 bg-gray-50 rounded-2xl;
+    @apply flex items-center justify-between p-3 bg-[#E8E3DE]/60 rounded-2xl;
   }
 }
 
 @utility bg-gradient {
-  background: linear-gradient(to bottom, #f0f4ff 60%, #fa7185cc);
+  background: linear-gradient(to bottom, #e6f2e6 60%, #c7b8dbcc);
 }
 
 @utility text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#AB8C95] via-[#000000] to-[#8E97C5];
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#4A6B4A] via-[#6B8E6B] to-[#9B7FB5];
 }
 
 @utility gradient-hover {
-  @apply bg-gradient-to-b from-light-blue-100 to-light-blue-200;
+  @apply bg-gradient-to-b from-light-matcha-100 to-light-matcha-200;
 }
 
 @utility primary-gradient {
-  background: linear-gradient(to bottom, #8e98ff, #606beb);
-  box-shadow: 0px 74px 21px 0px #6678ef00;
+  background: linear-gradient(to bottom, #a8c7a8, #6b8e6b);
+  box-shadow: 0px 74px 21px 0px #6b8e6b00;
 }
 
 @utility primary-gradient-hover {
-  background: linear-gradient(to bottom, #717dff, #4957eb);
+  background: linear-gradient(to bottom, #9bc7a1, #5a7e5a);
 }
 
 @utility inset-shadow {
-  box-shadow: inset 0 0 12px 0 rgba(36, 99, 235, 0.2);
+  box-shadow: inset 0 0 12px 0 rgba(107, 142, 107, 0.2);
   backdrop-filter: blur(10px);
 }
 

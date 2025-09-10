@@ -1,10 +1,40 @@
 export const resumes: Resume[] = [
   {
     id: "1",
-    companyName: "Google",
-    jobTitle: "Frontend Developer",
+    companyName: "Gauntlet AI",
+    jobTitle: "Senior AI Engineer",
     imagePath: "/images/resume_01.png",
     resumePath: "/resumes/resume-1.pdf",
+    feedback: {
+      overallScore: 98,
+      ATS: {
+        score: 100,
+        tips: [],
+      },
+      toneAndStyle: {
+        score: 97,
+        tips: [],
+      },
+      content: {
+        score: 99,
+        tips: [],
+      },
+      structure: {
+        score: 98,
+        tips: [],
+      },
+      skills: {
+        score: 100,
+        tips: [],
+      },
+    },
+  },
+  {
+    id: "2",
+    companyName: "Google",
+    jobTitle: "Frontend Developer",
+    imagePath: "/images/resume_02.png",
+    resumePath: "/resumes/resume-2.pdf",
     feedback: {
       overallScore: 85,
       ATS: {
@@ -30,11 +60,11 @@ export const resumes: Resume[] = [
     },
   },
   {
-    id: "2",
+    id: "3",
     companyName: "Microsoft",
     jobTitle: "Cloud Engineer",
-    imagePath: "/images/resume_02.png",
-    resumePath: "/resumes/resume-2.pdf",
+    imagePath: "/images/resume_03.png",
+    resumePath: "/resumes/resume-3.pdf",
     feedback: {
       overallScore: 55,
       ATS: {
@@ -60,11 +90,11 @@ export const resumes: Resume[] = [
     },
   },
   {
-    id: "3",
+    id: "4",
     companyName: "Apple",
     jobTitle: "iOS Developer",
-    imagePath: "/images/resume_03.png",
-    resumePath: "/resumes/resume-3.pdf",
+    imagePath: "/images/resume_04.png",
+    resumePath: "/resumes/resume-4.pdf",
     feedback: {
       overallScore: 75,
       ATS: {
@@ -85,6 +115,96 @@ export const resumes: Resume[] = [
       },
       skills: {
         score: 90,
+        tips: [],
+      },
+    },
+  },
+  {
+    id: "5",
+    companyName: "Netflix",
+    jobTitle: "Full Stack Developer",
+    imagePath: "/images/resume_05.png",
+    resumePath: "/resumes/resume-5.pdf",
+    feedback: {
+      overallScore: 92,
+      ATS: {
+        score: 95,
+        tips: [],
+      },
+      toneAndStyle: {
+        score: 88,
+        tips: [],
+      },
+      content: {
+        score: 94,
+        tips: [],
+      },
+      structure: {
+        score: 90,
+        tips: [],
+      },
+      skills: {
+        score: 96,
+        tips: [],
+      },
+    },
+  },
+  {
+    id: "6",
+    companyName: "Tesla",
+    jobTitle: "Data Engineer",
+    imagePath: "/images/resume_06.png",
+    resumePath: "/resumes/resume-6.pdf",
+    feedback: {
+      overallScore: 67,
+      ATS: {
+        score: 72,
+        tips: [],
+      },
+      toneAndStyle: {
+        score: 65,
+        tips: [],
+      },
+      content: {
+        score: 70,
+        tips: [],
+      },
+      structure: {
+        score: 68,
+        tips: [],
+      },
+      skills: {
+        score: 60,
+        tips: [],
+      },
+    },
+  },
+  {
+    id: "7",
+    companyName: "Amazon",
+    jobTitle: "UX Designer",
+    imagePath: "/images/resume_07.png",
+    resumePath: "/resumes/resume-7.pdf",
+    feedback: {
+      overallScore: 81,
+      ATS: {
+        score: 78,
+        tips: [],
+      },
+      toneAndStyle: {
+        score: 85,
+        tips: [],
+      },
+      content: {
+        score: 83,
+        tips: [],
+      },
+      structure: {
+        score: 82,
+        tips: [],
+      },
+      skills: {
+        score: 77,
         tips: [],
       },
     },

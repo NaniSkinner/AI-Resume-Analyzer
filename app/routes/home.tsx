@@ -5,7 +5,7 @@ import ResumeCard from "../components/ResumeCard";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Resumind" },
+    { title: "MatchaResume" },
     { name: "description", content: "Smart feedback for your resume" },
   ];
 }
@@ -15,9 +15,9 @@ export default function Home() {
     <main className=" bg-[url('/images/bg-main.svg')] bg-cover">
       <Narvbar />
       <section className="main-section">
-        <div className="page-heading">
-          <h1>Track your resume with Resumind</h1>
-          <h2> Get smart feedback for your resume</h2>
+        <div className="page-heading py-15">
+          <h1>Let AI match your resume to your dream job</h1>
+          <h2>Job matching that thinks like a recruiter.</h2>
         </div>
       </section>
 
