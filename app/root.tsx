@@ -6,6 +6,8 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
+import { useEffect } from "react";
+import { usePuterStore } from "./lib/puter";
 
 import type { Route } from "./+types/root";
 import "./app.css";
@@ -24,6 +26,13 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const store = usePuterStore();
+
+  useEffect(() => {
+    console.log("Initializing Puter store...");
+    store.init();
+  }, []);
+
   return (
     <html lang="en">
       <head>
