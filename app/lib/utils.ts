@@ -17,6 +17,7 @@ export const formatSize = (bytes: number): string => {
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(1))} ${sizes[i]}`;
 };
 
+export const generateUUID = (): string => crypto.randomUUID();
 /**
  * Validates if a file type is allowed
  * @param file - File to validate

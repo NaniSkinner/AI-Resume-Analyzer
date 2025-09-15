@@ -2,7 +2,11 @@ import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { formatSize } from "../lib/utils";
 
-const FileUploader = () => {
+interface FileUploaderProps {
+  onFileSelect?: (file: File | null) => void;
+}
+
+const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadError, setUploadError] = useState<string>("");
 
@@ -25,6 +29,9 @@ const FileUploader = () => {
       if (acceptedFiles.length > 0) {
         const file = acceptedFiles[0]; // Always take only the first file
         setSelectedFile(file);
+        if (onFileSelect) {
+          onFileSelect(file);
+        }
 
         // Always log for debugging (temporarily)
         console.log(
@@ -80,6 +87,9 @@ const FileUploader = () => {
 
     setSelectedFile(null);
     setUploadError("");
+    if (onFileSelect) {
+      onFileSelect(null);
+    }
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
