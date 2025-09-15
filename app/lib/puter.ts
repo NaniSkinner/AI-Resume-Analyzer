@@ -327,15 +327,21 @@ export const usePuterStore = create<PuterStore>((set, get) => {
     >;
   };
 
-  const feedback = async (path: string, message: string) => {
+  const feedback = async (
+    path: string,
+    message: string
+  ): Promise<AIResponse | undefined> => {
     const puter = getPuter();
     if (!puter) {
       setError("Puter.js not available");
-      return;
+      return undefined;
     }
 
-    return puter.ai.chat(
-      [
+    try {
+      console.log("🤖 Starting AI analysis with path:", path);
+
+      // Try with default model first (no model specified)
+      const response = await puter.ai.chat([
         {
           role: "user",
           content: [
@@ -349,9 +355,15 @@ export const usePuterStore = create<PuterStore>((set, get) => {
             },
           ],
         },
-      ],
-      { model: "claude-sonnet-4" }
-    ) as Promise<AIResponse | undefined>;
+      ]);
+
+      console.log("✅ AI analysis successful");
+      return response as AIResponse;
+    } catch (error) {
+      console.error("❌ AI analysis failed:", error);
+      // Return undefined for errors, handle error checking in caller
+      return undefined;
+    }
   };
 
   const img2txt = async (image: string | File | Blob, testMode?: boolean) => {

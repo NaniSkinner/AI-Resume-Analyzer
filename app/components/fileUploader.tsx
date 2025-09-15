@@ -28,8 +28,10 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
       // Ensure only one file is processed (extra safety)
       if (acceptedFiles.length > 0) {
         const file = acceptedFiles[0]; // Always take only the first file
+        console.log("📁 Setting selected file:", file.name);
         setSelectedFile(file);
         if (onFileSelect) {
+          console.log("📤 Calling onFileSelect with:", file.name);
           onFileSelect(file);
         }
 

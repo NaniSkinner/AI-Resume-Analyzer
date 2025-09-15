@@ -33,6 +33,8 @@ const Upload = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [statusText, setStatusText] = useState("");
   const [file, setFile] = useState<File | null>(null);
+  const [analysisComplete, setAnalysisComplete] = useState(false);
+  const [uploaderKey, setUploaderKey] = useState(0);
 
   const handleAnalyze = async (
     companyName: string,
@@ -44,6 +46,14 @@ const Upload = () => {
     setStatusText("Uploading resume...");
     const uploadedFile = await fs.upload([resume]);
     // TODO: Add rest of analysis logic
+  };
+
+  const startNewAnalysis = () => {
+    setIsProcessing(false);
+    setStatusText("");
+    setAnalysisComplete(false);
+    setFile(null);
+    setUploaderKey((prev) => prev + 1); // Force FileUploader to reset
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -59,7 +69,14 @@ const Upload = () => {
       const resume = formData.get("resume") as File;
 
       // Get the file from the FileUploader component state
-      if (!file) return setStatusText("Please upload a resume file first");
+      console.log(
+        "📋 Form submission - current file state:",
+        file?.name || "null"
+      );
+      if (!file) {
+        setStatusText("Please upload a resume file first");
+        return;
+      }
 
       try {
         setIsProcessing(true);
@@ -107,24 +124,48 @@ const Upload = () => {
             AIResponseFormat: AIResponseFormat,
           })
         );
-        if (!feedback) return setStatusText("Error: Failed to analyze resume");
 
-        const feedbackText =
-          typeof feedback.message.content === "string"
-            ? feedback.message.content
-            : feedback.message.content[0].text;
+        console.log("AI feedback response:", feedback);
 
-        data.feedback = JSON.parse(feedbackText);
-        await kv.set(`resume:${uuid}`, JSON.stringify(data));
+        if (!feedback) {
+          console.error("AI analysis failed: No response received");
+          setStatusText(
+            "Error: Failed to analyze resume - AI service unavailable"
+          );
+          setIsProcessing(false);
+          return;
+        }
 
-        setStatusText("Analysis complete!");
+        // Extract feedback text from AI response
+        let feedbackText = "";
+        if (feedback.message && feedback.message.content) {
+          feedbackText =
+            typeof feedback.message.content === "string"
+              ? feedback.message.content
+              : feedback.message.content[0]?.text || "";
+        } else {
+          console.error("Invalid AI response format:", feedback);
+          setStatusText("Error: Invalid AI response format");
+          setIsProcessing(false);
+          return;
+        }
+
+        try {
+          data.feedback = JSON.parse(feedbackText);
+          await kv.set(`resume:${uuid}`, JSON.stringify(data));
+        } catch (parseError) {
+          console.error("Failed to parse AI response:", parseError);
+          setStatusText("Error: Invalid AI response format");
+          setIsProcessing(false);
+          return;
+        }
+
+        setStatusText("Analysis complete! Your resume has been analyzed.");
+        setAnalysisComplete(true);
         console.log("Analysis result:", data);
 
-        // Navigate to results page or reset form
-        setTimeout(() => {
-          setIsProcessing(false);
-          setStatusText("");
-        }, 2000);
+        // Keep the success state visible - don't auto-reset
+        // Users can manually start a new analysis if needed
       } catch (error) {
         console.error("Analysis error:", error);
         setStatusText("Error occurred during analysis");
@@ -144,10 +185,20 @@ const Upload = () => {
               <h2>{statusText}</h2>
               <img src="/images/resume-scan.gif" className="w-full" />
             </>
+          ) : analysisComplete ? (
+            <>
+              <h2 className="text-green-600">✅ {statusText}</h2>
+              <button
+                onClick={startNewAnalysis}
+                className="primary-button mt-4"
+              >
+                Analyze Another Resume
+              </button>
+            </>
           ) : (
             <h2>Upload your resume to get ATS score and improvemnt tips</h2>
           )}
-          {!isProcessing && (
+          {!isProcessing && !analysisComplete && (
             <form
               id="upload-form"
               onSubmit={handleSubmit}
@@ -182,7 +233,7 @@ const Upload = () => {
               </div>
               <div className="form-div">
                 <label htmlFor="uploader">Upload Resume</label>
-                <FileUploader onFileSelect={setFile} />
+                <FileUploader key={uploaderKey} onFileSelect={setFile} />
               </div>
 
               <button type="submit" className="primary-button">
