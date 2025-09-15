@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { usePuterStore } from "~/lib/puter";
 import { useParams, Link, useNavigate } from "react-router";
 import { resumes } from "~/constants";
+import Summary from "~/components/Summary";
 
 export function meta() {
   return [
@@ -20,6 +21,12 @@ const Resume = () => {
   const [resumeUrl, setResumeUrl] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<any>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoading && !auth.isAuthenticated) {
+      navigate("/auth?next=/resume/" + id);
+    }
+  }, [isLoading, auth.isAuthenticated, navigate, id]);
 
   useEffect(() => {
     const fetchResume = async () => {
@@ -61,7 +68,25 @@ const Resume = () => {
         </Link>
       </nav>
       <div className="flex flex-row w-full max-lg:flex-col-reverse">
-        <section className="feedback-section bg-[url('/images/bg-small.svg')] bg-cover h-[100vh] sticky top-0 flex items-center justify-center p-6">
+        <section className="feedback-section">
+          <h2 className="text-4xl !text-black font-bold">Resume {id} Review</h2>
+          {feedback ? (
+            <div className="flex flex-col gap-8 animate-in fade-in duration-1000">
+              <div className="text-lg">
+                <Summary feedback={feedback} />
+                <ATS
+                  score={feedback.ATS.score || 0}
+                  suggestions={feedback.ATS.tips || []}
+                />
+                <Details feedback={feedback} />
+              </div>
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-lg">
+                <h3 className="text-2xl !text-black font-bold">Feedback</h3>
+              </div>
+            </div>
+          ) : null}
+        </section>
+        <section className="bg-[url('/images/bg-small.svg')] bg-cover h-[100vh] sticky top-0 flex items-center justify-center p-6">
           {imageUrl && resumeUrl && feedback && (
             <div className="animate-in fade-in duration-1000 w-full max-w-2xl">
               <div className="gradient-border">
