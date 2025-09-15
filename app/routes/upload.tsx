@@ -163,6 +163,7 @@ const Upload = () => {
         setStatusText("Analysis complete! Your resume has been analyzed.");
         setAnalysisComplete(true);
         console.log("Analysis result:", data);
+        navigate(`/resume/${uuid}`);
 
         // Keep the success state visible - don't auto-reset
         // Users can manually start a new analysis if needed
