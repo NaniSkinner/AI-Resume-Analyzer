@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { usePuterStore } from "../lib/puter";
+import Footer from "../components/Footer";
 
 export function meta() {
   return [
@@ -65,6 +66,8 @@ export default function Auth() {
           </div>
         </section>
       </div>
+
+      <Footer />
     </main>
   );
 }

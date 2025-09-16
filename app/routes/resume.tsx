@@ -5,6 +5,7 @@ import { resumes } from "~/constants";
 import Summary from "~/components/Summary";
 import ATS from "~/components/ATS";
 import Details from "~/components/Details";
+import Footer from "~/components/Footer";
 
 export function meta() {
   return [
@@ -111,6 +112,8 @@ const Resume = () => {
           </section>
         </div>
       </div>
+
+      <Footer />
     </main>
   );
 };

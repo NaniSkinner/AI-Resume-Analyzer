@@ -1,5 +1,6 @@
 import React from "react";
 import Narvbar from "../components/Narvbar";
+import Footer from "../components/Footer";
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { useNavigate } from "react-router";
@@ -81,6 +82,11 @@ const Upload = () => {
       try {
         setIsProcessing(true);
         setStatusText("Uploading resume...");
+
+        // Start the minimum loading time alongside the actual processing
+        const startTime = Date.now();
+        const minLoadingTime = 3000; // 3 seconds minimum to enjoy the GIF
+
         const uploadedFile = await fs.upload([file]);
         if (!uploadedFile)
           return setStatusText("Error: Failed to upload resume");
@@ -161,8 +167,21 @@ const Upload = () => {
         }
 
         setStatusText("Analysis complete! Your resume has been analyzed.");
+
+        // Ensure minimum loading time has passed so users can see the animation
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = Math.max(0, minLoadingTime - elapsedTime);
+
+        if (remainingTime > 0) {
+          setStatusText("Finalizing your results...");
+          await new Promise((resolve) => setTimeout(resolve, remainingTime));
+        }
+
         setAnalysisComplete(true);
         console.log("Analysis result:", data);
+
+        // Add a brief moment to show success before navigating
+        await new Promise((resolve) => setTimeout(resolve, 800));
         navigate(`/resume/${uuid}`);
 
         // Keep the success state visible - don't auto-reset
@@ -244,6 +263,8 @@ const Upload = () => {
           )}
         </div>
       </section>
+
+      <Footer />
     </main>
   );
 };

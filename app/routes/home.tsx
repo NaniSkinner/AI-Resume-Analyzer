@@ -1,6 +1,7 @@
 import type { Route } from "./+types/home";
 import Narvbar from "../components/Narvbar";
 import ResumeCard from "../components/ResumeCard";
+import Footer from "../components/Footer";
 import { usePuterStore } from "../lib/puter";
 import { Link, useNavigate } from "react-router";
 import { useEffect } from "react";
@@ -30,18 +31,30 @@ export default function Home() {
       try {
         setLoading(true);
 
-        const resumeList =
-          ((await kv.list("resume:*", true)) as KVItem[]) || [];
+        // Create minimum loading time and actual data loading
+        const [_, resumeData] = await Promise.all([
+          // Minimum 2 seconds loading time so users can see the cute penguin GIF!
+          new Promise((resolve) => setTimeout(resolve, 2000)),
+          // Actual data loading
+          (async () => {
+            const resumeList =
+              ((await kv.list("resume:*", true)) as KVItem[]) || [];
 
-        const parsedResumes = resumeList?.map(
-          (resume) => JSON.parse(resume.value) as Resume
-        );
+            const parsedResumes = resumeList?.map(
+              (resume) => JSON.parse(resume.value) as Resume
+            );
 
-        console.log(parsedResumes);
-        setResumes(parsedResumes || []);
+            console.log(parsedResumes);
+            return parsedResumes || [];
+          })(),
+        ]);
+
+        setResumes(resumeData);
       } catch (error) {
         console.error("Error loading resumes:", error);
         setResumes([]);
+        // Even on error, wait the minimum time so loading state feels consistent
+        await new Promise((resolve) => setTimeout(resolve, 1500));
       } finally {
         setLoading(false);
       }
@@ -91,6 +104,8 @@ export default function Home() {
           </Link>
         </div>
       )}
+
+      <Footer />
     </main>
   );
 }
