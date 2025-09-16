@@ -27,56 +27,58 @@ const ATS = ({ score, suggestions }: ATSProps) => {
   };
 
   return (
-    <div className={`rounded-2xl shadow-md w-full p-6 ${getBackgroundClass()}`}>
+    <div
+      className={`rounded-lg shadow-sm w-full p-4 border border-gray-100 ${getBackgroundClass()}`}
+    >
       {/* Header Section */}
-      <div className="flex items-center gap-3 mb-3">
-        <div className="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center">
-          <span className="text-white text-sm">✓</span>
+      <div className="flex items-center gap-2 mb-3">
+        <div className="w-5 h-5 bg-teal-500 rounded-full flex items-center justify-center">
+          <span className="text-white text-xs">✓</span>
         </div>
-        <h3 className="text-lg font-bold text-gray-800">
+        <h3 className="text-sm font-bold text-gray-800">
           ATS Score - {score || 0}/100
         </h3>
       </div>
 
       {/* Status Message */}
-      <h4 className="text-base font-semibold text-gray-700 mb-3">
+      <h4 className="text-sm font-semibold text-gray-700 mb-2">
         {getStatusMessage()}
       </h4>
 
       {/* Description */}
-      <p className="text-sm text-gray-600 mb-4">
-        This score represents how well your resume is likely to perform in
-        Applicant Tracking Systems used by employers.
+      <p className="text-xs text-gray-600 mb-3">
+        How well your resume performs in ATS systems.
       </p>
 
       {/* Suggestions List */}
-      <div className="space-y-2 mb-4">
+      <div className="space-y-2 mb-3">
         {suggestions && suggestions.length > 0 ? (
-          suggestions.map((suggestion, index) => (
-            <div key={index} className="flex items-start gap-3">
-              <div className="mt-1">
+          suggestions.slice(0, 3).map((suggestion, index) => (
+            <div key={index} className="flex items-start gap-2">
+              <div className="mt-0.5">
                 {suggestion.type === "good" ? (
-                  <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
+                  <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
                     <span className="text-white text-xs">✓</span>
                   </div>
                 ) : (
-                  <div className="w-5 h-5 bg-orange-400 rounded-full flex items-center justify-center">
+                  <div className="w-4 h-4 bg-orange-400 rounded-full flex items-center justify-center">
                     <span className="text-white text-xs">⚠</span>
                   </div>
                 )}
               </div>
-              <p className="text-sm text-gray-700 flex-1">{suggestion.tip}</p>
+              <p className="text-xs text-gray-700 flex-1 leading-relaxed">
+                {suggestion.tip}
+              </p>
             </div>
           ))
         ) : (
-          <p className="text-sm text-gray-500">No ATS suggestions available</p>
+          <p className="text-xs text-gray-500">No suggestions available</p>
         )}
       </div>
 
       {/* Closing Message */}
-      <p className="text-sm text-gray-600 italic">
-        Keep refining your resume to improve your chances of getting past ATS
-        filters and into the hands of recruiters.
+      <p className="text-xs text-gray-600 italic">
+        Keep improving to get past ATS filters.
       </p>
     </div>
   );

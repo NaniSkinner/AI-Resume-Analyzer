@@ -6,15 +6,17 @@ const Category = ({ title, score }: { title: string; score: number }) => {
     score > 70
       ? "text-green-600"
       : score > 49
-        ? "text-yellow-400"
-        : "text-red-600";
+        ? "text-yellow-500"
+        : "text-red-500";
 
   return (
-    <div className="bg-white rounded-2xl shadow-md p-4">
-      <div className="flex flex-col items-center space-y-3">
-        <p className="text-lg font-semibold text-gray-800">{title}</p>
-        <div className="flex items-center gap-3">
-          <p className="text-2xl font-bold">
+    <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-3">
+      <div className="flex flex-col items-center space-y-1">
+        <p className="text-xs font-semibold text-gray-800 text-center">
+          {title}
+        </p>
+        <div className="flex items-center gap-2">
+          <p className="text-sm font-bold">
             <span className={textColor}>{score}</span>/100
           </p>
           <ScoreBadge score={score} />
@@ -31,23 +33,23 @@ const Summary = ({ feedback }: { feedback: Feedback }) => {
   const score = feedback?.overallScore ?? 0;
 
   return (
-    <div className="space-y-4">
-      <div className="bg-white rounded-2xl shadow-md w-full">
-        <ScoreGage score={score} />
-        <div className="flex flex-row items-center p-4 gap-8">
-          <div className="flex items-center gap-4">
-            <h2 className="text-2xl !text-black font-bold">
-              Your Resume Score
-            </h2>
-            <ScoreBadge score={score} />
+    <div className="space-y-3">
+      <div className="bg-white rounded-lg shadow-sm w-full border border-gray-100">
+        <div className="p-4">
+          <ScoreGage score={score} />
+          <div className="flex flex-row items-center justify-between mt-2">
+            <div className="flex items-center gap-2">
+              <h2 className="text-sm !text-black font-bold">
+                Your Resume Score
+              </h2>
+              <ScoreBadge score={score} />
+            </div>
+            <p className="text-xs text-gray-600">Based on variables below.</p>
           </div>
-          <p className="text-sm text-gray">
-            This score is calculated based on the variables listed below.
-          </p>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-2">
         <Category
           title="Tone and Style"
           score={feedback?.toneAndStyle?.score ?? 0}
