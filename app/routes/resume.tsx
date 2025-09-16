@@ -139,7 +139,7 @@ const Resume = () => {
                     >
                       <img
                         src={imageUrl}
-                        className="w-auto h-auto max-w-full max-h-full object-contain transition-all duration-300 group-hover:scale-[1.01] mx-auto"
+                        className="w-auto h-auto max-w-full max-h-full object-contain transition-all duration-300 hover:scale-[1.01] mx-auto"
                         title="Click to open full PDF"
                         alt="Resume preview"
                         style={{
@@ -148,7 +148,7 @@ const Resume = () => {
                         }}
                       />
                     </a>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/3 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
                 </div>
               </div>

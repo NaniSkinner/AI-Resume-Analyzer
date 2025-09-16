@@ -55,9 +55,9 @@ const ResumeCard = ({ resume }: { resume: Resume }) => {
             <img
               src={resumeURL || imagePath}
               alt="Resume preview"
-              className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+              className="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
           </div>
         )}
 
@@ -78,7 +78,7 @@ const ResumeCard = ({ resume }: { resume: Resume }) => {
             </span>
           </div>
           <svg
-            className="w-4 h-4 text-lavender-600 group-hover:text-lavender-700 transition-colors"
+            className="w-4 h-4 text-lavender-600 hover:text-lavender-700 transition-colors"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
