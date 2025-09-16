@@ -3,6 +3,8 @@ import { usePuterStore } from "~/lib/puter";
 import { useParams, Link, useNavigate } from "react-router";
 import { resumes } from "~/constants";
 import Summary from "~/components/Summary";
+import ATS from "~/components/ATS";
+import Details from "~/components/Details";
 
 export function meta() {
   return [

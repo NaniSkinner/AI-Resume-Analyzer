@@ -2,6 +2,9 @@
  * Utility functions for the MatchaResume application
  */
 
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
 /**
  * Formats a file size in bytes to a human-readable string
  * @param bytes - File size in bytes
@@ -16,6 +19,15 @@ export const formatSize = (bytes: number): string => {
 
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(1))} ${sizes[i]}`;
 };
+
+/**
+ * Combines class names using clsx and merges Tailwind classes with tailwind-merge
+ * @param inputs - Class names, objects, or arrays to combine
+ * @returns Merged class string
+ */
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
 
 export const generateUUID = (): string => crypto.randomUUID();
 /**
