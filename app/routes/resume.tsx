@@ -23,6 +23,7 @@ const Resume = () => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [resumeUrl, setResumeUrl] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<any>(null);
+  const [scrollY, setScrollY] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -59,9 +60,25 @@ const Resume = () => {
     fetchResume();
   }, [id, kv]);
 
+  // Parallax scroll animation for resume preview
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const resume = resumes.find((resume) => resume.id === id);
   return (
-    <main className="pt-0">
+    <main
+      className="pt-0 relative"
+      style={{
+        backgroundImage: `url('/images/bg-main-2.svg')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+      }}
+    >
       <nav className="resume-nav">
         <Link to="/" className="back-button">
           <img src="/icons/back.svg" alt="back" className="w-2.5 h-2.5" />
@@ -91,21 +108,48 @@ const Resume = () => {
           </section>
           <section className="flex-1 max-w-lg max-lg:max-w-none">
             {imageUrl && resumeUrl && feedback && (
-              <div className="animate-in fade-in duration-1000 sticky top-6 max-lg:static">
-                <div className="border border-gray-200/60 rounded-2xl bg-white/80 backdrop-blur-sm shadow-lg p-4">
-                  <a
-                    href={resumeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block cursor-pointer hover:opacity-90 transition-opacity"
-                  >
-                    <img
-                      src={imageUrl}
-                      className="w-full h-auto object-contain rounded-xl border border-gray-200 max-h-[600px]"
-                      title="Click to open full PDF"
-                      alt="Resume preview"
-                    />
-                  </a>
+              <div
+                className="animate-in fade-in duration-1000 max-lg:static"
+                style={{
+                  position: "sticky",
+                  top: "20px",
+                  transform: `translateY(${scrollY * 2.1}px)`,
+                }}
+              >
+                <div className="border border-gray-200/60 rounded-2xl bg-white/80 backdrop-blur-sm shadow-lg overflow-hidden resume-preview">
+                  <div className="px-3 py-2 border-b border-gray-100 flex justify-between items-center">
+                    <h3 className="text-xs font-medium text-gray-700">
+                      Resume Preview
+                    </h3>
+                    <a
+                      href={resumeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[10px] text-matcha-600 hover:text-matcha-700 transition-colors"
+                    >
+                      Open Full PDF →
+                    </a>
+                  </div>
+                  <div className="relative group h-[600px] overflow-auto p-4">
+                    <a
+                      href={resumeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="cursor-pointer block w-full h-full"
+                    >
+                      <img
+                        src={imageUrl}
+                        className="w-auto h-auto max-w-full max-h-full object-contain transition-all duration-300 group-hover:scale-[1.01] mx-auto"
+                        title="Click to open full PDF"
+                        alt="Resume preview"
+                        style={{
+                          borderRadius: "0",
+                          display: "block",
+                        }}
+                      />
+                    </a>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
                 </div>
               </div>
             )}

@@ -33,23 +33,36 @@ const Summary = ({ feedback }: { feedback: Feedback }) => {
   const score = feedback?.overallScore ?? 0;
 
   return (
-    <div className="space-y-3">
+    <div
+      className="space-y-3 relative p-4 rounded-2xl"
+      style={{
+        backgroundImage: `url('/images/bg-small.svg')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div className="bg-white rounded-lg shadow-sm w-full border border-gray-100">
         <div className="p-4">
           <ScoreGage score={score} />
-          <div className="flex flex-row items-center justify-between mt-2">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col items-center mt-3">
+            <div className="flex items-center gap-2 mb-2">
               <h2 className="text-sm !text-black font-bold">
                 Your Resume Score
               </h2>
-              <ScoreBadge score={score} />
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-bold">{score}/100</span>
+                <ScoreBadge score={score} />
+              </div>
             </div>
-            <p className="text-xs text-gray-600">Based on variables below.</p>
+            <p className="text-xs text-center text-gray-600">
+              Based on variables below.
+            </p>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 items-center gap-4">
         <Category
           title="Tone and Style"
           score={feedback?.toneAndStyle?.score ?? 0}

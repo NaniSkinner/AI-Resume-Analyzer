@@ -29,17 +29,17 @@ const ResumeCard = ({ resume }: { resume: Resume }) => {
       <div className="resume-card-header">
         <div className="flex-1">
           {companyName && (
-            <h3 className="font-semibold text-neutral-800 mb-1 break-words">
+            <h3 className="font-medium text-neutral-800 mb-1 break-words">
               {companyName}
             </h3>
           )}
           {jobTitle && (
-            <p className="text-sm text-matcha-600 break-words font-medium">
+            <p className="text-sm text-lavender-600 break-words font-normal">
               {jobTitle}
             </p>
           )}
           {!companyName && !jobTitle && (
-            <h3 className="font-semibold text-neutral-800 break-words">
+            <h3 className="font-medium text-neutral-800 break-words">
               Resume Analysis
             </h3>
           )}
@@ -51,7 +51,7 @@ const ResumeCard = ({ resume }: { resume: Resume }) => {
 
       <div className="resume-card-content">
         {resumeURL && (
-          <div className="relative overflow-hidden rounded-lg border border-matcha-100">
+          <div className="relative overflow-hidden rounded-lg border border-lavender-300">
             <img
               src={resumeURL || imagePath}
               alt="Resume preview"
@@ -61,15 +61,24 @@ const ResumeCard = ({ resume }: { resume: Resume }) => {
           </div>
         )}
 
-        <div className="flex items-center justify-between mt-4 pt-4 border-t border-matcha-100">
+        <div
+          className="flex items-center justify-between mt-4 pt-4 border-t border-lavender-200/60"
+          style={{ borderColor: "rgba(180, 166, 255, 0.4)" }}
+        >
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-matcha-400 rounded-full"></div>
-            <span className="text-xs font-medium text-matcha-600">
+            <div
+              className="w-2 h-2 bg-lavender-400/70 rounded-full"
+              style={{
+                backgroundColor: "rgba(184, 166, 255, 0.7)",
+                filter: "blur(0.5px)",
+              }}
+            ></div>
+            <span className="text-xs font-normal text-lavender-600">
               AI Analyzed
             </span>
           </div>
           <svg
-            className="w-4 h-4 text-matcha-400 group-hover:text-matcha-600 transition-colors"
+            className="w-4 h-4 text-lavender-600 group-hover:text-lavender-700 transition-colors"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

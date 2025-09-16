@@ -121,7 +121,7 @@ form {
   }
 
   .resume-card {
-    @apply group relative bg-white border border-matcha-100 rounded-xl p-6 transition-all duration-300 hover:shadow-lg hover:shadow-matcha-100/20 hover:border-matcha-200 hover:-translate-y-1 cursor-pointer;
+    @apply group relative bg-white border border-lavender-300 rounded-xl p-6 transition-all duration-300 hover:shadow-lg hover:shadow-lavender-300/20 hover:border-lavender-400 hover:-translate-y-1 cursor-pointer;
   }
 
   .resume-card::before {
@@ -192,6 +192,18 @@ form {
   /* Center Page Signature */
   .app-footer {
     @apply flex justify-center items-center py-8 z-40;
+  }
+
+  /* Dynamic Resume Scroll */
+  .resume-preview {
+    transition:
+      transform 0.2s ease-out,
+      box-shadow 0.2s ease-out;
+  }
+
+  .resume-preview.scrolled {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   }
 
   .footer-content {
