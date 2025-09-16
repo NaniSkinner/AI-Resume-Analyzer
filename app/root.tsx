@@ -23,6 +23,10 @@ export const links: Route.LinksFunction = () => [
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
   },
+  // M3 Favicon
+  { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+  { rel: "icon", href: "/favicon.ico", type: "image/x-icon", sizes: "32x32" },
+  { rel: "apple-touch-icon", href: "/favicon.svg", sizes: "180x180" },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {

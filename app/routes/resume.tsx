@@ -113,7 +113,7 @@ const Resume = () => {
                 style={{
                   position: "sticky",
                   top: "20px",
-                  transform: `translateY(${scrollY * 2.1}px)`,
+                  transform: `translateY(${scrollY * 1.5}px)`,
                 }}
               >
                 <div className="border border-gray-200/60 rounded-2xl bg-white/80 backdrop-blur-sm shadow-lg overflow-hidden resume-preview">
