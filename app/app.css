@@ -98,6 +98,30 @@ form {
     @apply flex items-center justify-between px-6 py-4 bg-white/80 backdrop-blur-md border-b border-matcha-100 sticky top-0 z-50;
   }
 
+  .matcha-navbar {
+    @apply w-full bg-white/90 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50 shadow-sm;
+  }
+
+  .matcha-logo {
+    @apply text-3xl md:text-4xl font-extrabold tracking-tight cursor-pointer hover:scale-105 transition-transform duration-200;
+  }
+
+  .matcha-text {
+    background: linear-gradient(135deg, #4a8a4a 0%, #7bc17b 50%, #5fa05f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .resume-text {
+    background: linear-gradient(135deg, #8366a3 0%, #b8a6ff 50%, #6b5086 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
   .back-button {
     @apply inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-matcha-600 hover:text-matcha-700 hover:bg-matcha-50 rounded-lg transition-colors;
   }
@@ -122,6 +146,32 @@ form {
   /* Modern Cards */
   .resumes-section {
     @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full max-w-7xl;
+  }
+
+  .centered-resumes-section {
+    @apply flex justify-center items-start min-h-screen py-12 px-4;
+  }
+
+  .resume-grid-container {
+    @apply w-full max-w-4xl mx-auto px-12 py-12 bg-white/8 backdrop-blur-sm rounded-3xl border border-white/20 shadow-2xl;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    place-items: center;
+  }
+
+  /* Responsive grid adjustments */
+  @media (min-width: 768px) {
+    .resume-grid-container {
+      @apply max-w-6xl px-16 py-16;
+      gap: 3rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .resume-grid-container {
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
   }
 
   .resume-card {

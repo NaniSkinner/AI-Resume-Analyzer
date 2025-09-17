@@ -87,11 +87,13 @@ export default function Home() {
       </section>
 
       {!loading && resumes.length > 0 && (
-        <div className="resumes-section pb-8">
-          {resumes.map((resume) => (
-            <ResumeCard key={resume.id} resume={resume} />
-          ))}
-        </div>
+        <section className="centered-resumes-section">
+          <div className="resume-grid-container">
+            {resumes.map((resume) => (
+              <ResumeCard key={resume.id} resume={resume} />
+            ))}
+          </div>
+        </section>
       )}
 
       {!loading && resumes?.length === 0 && (
